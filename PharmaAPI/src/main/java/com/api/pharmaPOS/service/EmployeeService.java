@@ -1,5 +1,6 @@
 package com.api.pharmaPOS.service;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -43,7 +44,7 @@ public class EmployeeService {
 	// Method to update an employee
 
 	public void updateEmployee(int id, Employee employee) {
-		employeeRepository.save(employee);
+		employeeRepository.save( employee);
 	}
 
 	// Method to delete an employee

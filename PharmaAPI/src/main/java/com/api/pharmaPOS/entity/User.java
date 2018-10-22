@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "User")
 
@@ -25,54 +27,56 @@ public class User implements Serializable {
 	@Column(name = "State")
 	private boolean State;
 
-	@ManyToOne
-	@JoinColumn(name = "EmployeeId")
-	private Employee EmployeeUser;
-
 	@Column(name = "Email")
 	private String email;
 
 	@Column(name = "Password")
 	private String password;
+	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "EmployeeId")
+	private Employee EmployeeUser;
 
 	public int getUserId() {
 		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
 	}
 
 	public boolean isState() {
 		return State;
 	}
 
-	public void setState(boolean state) {
-		State = state;
-	}
-
-	public Employee getEmployeeUser() {
-		return EmployeeUser;
-	}
-
-	public void setEmployeeUser(Employee employeeUser) {
-		EmployeeUser = employeeUser;
-	}
-
 	public String getEmail() {
 		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public String getPassword() {
 		return password;
 	}
 
+	public Employee getEmployeeUser() {
+		return EmployeeUser;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public void setState(boolean state) {
+		State = state;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public void setEmployeeUser(Employee employeeUser) {
+		EmployeeUser = employeeUser;
+	}
+	
 
 }

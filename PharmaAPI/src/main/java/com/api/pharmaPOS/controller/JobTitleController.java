@@ -1,18 +1,23 @@
 package com.api.pharmaPOS.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.api.pharmaPOS.entity.District;
 import com.api.pharmaPOS.entity.JobTitle;
 import com.api.pharmaPOS.service.JobTitleService;
 
 @RestController
-
+@RequestMapping("/api")
 public class JobTitleController {
 	
 	// Dependency injection
@@ -21,12 +26,13 @@ public class JobTitleController {
 	private JobTitleService jobTitleService;
 
 	// Method to get all jobtitles
+	@RequestMapping(value="/jobtitles",method=RequestMethod.GET,headers="Accept=application/json")
+	public ResponseEntity<List<JobTitle>> getAllJobTitles(){
+		List<JobTitle> lista=new ArrayList<JobTitle>();
+		lista=jobTitleService.getAllJobTitles();
 
-	@RequestMapping("/jobtitles")
-	public List<JobTitle> getAllJobTitles() {
-		return jobTitleService.getAllJobTitles();
+		return  new ResponseEntity<List<JobTitle>>(lista,HttpStatus.OK);
 	}
-
 	// Method to get jobtitles by id
 
 	@RequestMapping("/jobtitles/{id}")

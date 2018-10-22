@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "District")
 
@@ -24,10 +26,12 @@ public class District implements Serializable {
 
 	@Column(name = "Name")
 	private String name;
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "DistrictCustomer")
 	private List<Customer> listDistrictCustomer;
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "DistrictEmployee")
 	private List<Employee> listDistrictEmployee;
 

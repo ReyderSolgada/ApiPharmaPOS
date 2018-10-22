@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "SalesOrder")
 
@@ -24,7 +26,7 @@ public class SalesOrder implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "OrderId")
+	@Column(name = "SalesOrderId")
 	private int orderId;
 
 	@Column(name = "Serial")
@@ -34,10 +36,12 @@ public class SalesOrder implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date orderDate;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "CustomerId")
 	private Customer CustomerSalesOrder;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "EmployeeId")
 	private Employee EmployeeSalesOrder;
@@ -45,6 +49,7 @@ public class SalesOrder implements Serializable {
 	@Column(name = "State")
 	private String State;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "SalesOrderSalesOrderItem")
 	private List<SalesOrderItem> listSalesOrderItem;
 

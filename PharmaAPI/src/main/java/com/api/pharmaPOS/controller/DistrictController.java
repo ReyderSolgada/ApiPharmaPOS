@@ -1,8 +1,11 @@
 package com.api.pharmaPOS.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +15,7 @@ import com.api.pharmaPOS.entity.District;
 import com.api.pharmaPOS.service.DistrictService;
 
 @RestController
-
+@RequestMapping("/api")
 public class DistrictController {
 
 	// Dependency injection
@@ -21,12 +24,13 @@ public class DistrictController {
 	private DistrictService districtService;
 
 	// Method to get all districts
+	@RequestMapping(value="/districts",method=RequestMethod.GET,headers="Accept=application/json")
+	public ResponseEntity<List<District>> getAllDistricts(){
+		List<District> lista=new ArrayList<District>();
+		lista=districtService.getAllDistricts();
 
-	@RequestMapping("/districts")
-	public List<District> getAllDistricts() {
-		return districtService.getAllDistricts();
+		return  new ResponseEntity<List<District>>(lista,HttpStatus.OK);
 	}
-
 	// Method to get districts by id
 
 	@RequestMapping("/districts/{id}")
