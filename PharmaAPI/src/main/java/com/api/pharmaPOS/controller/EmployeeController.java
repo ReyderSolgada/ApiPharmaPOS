@@ -51,14 +51,67 @@ public class EmployeeController {
 	@RequestMapping(value = "/EmployeeAdd", method = RequestMethod.POST, headers = "Accept=application/json")
 	public ResponseEntity<Response> AddEmployee(@RequestBody Employee emp) {
 		Response response = new Response();
+		String success="",error="";
 		try {
-			employeeService.addEmployee(emp);
-			response.setSuccess("Empleado insertardo correctamente");
+			
+			if(emp.getFirstName().equals("")) {
+				error="El campo Nombre es requerido";
+			}else {
+				if(emp.getMiddleName().equals(""))
+					error="El campo Ape.Paterno es requerido";
+				else
+					if(emp.getLastName().equals(""))
+						error="El campo Ape. Materno es requerido";
+					else
+						if(emp.getHireDate()==null)
+							error="La fecha de Ingreso es requerido";
+						else
+							if(emp.getDni().equals(""))
+								error="El campo Dni es requerido";
+							else
+								if(!isNumeric(emp.getDni()))
+									error="El campo dni solo debe contener Números";
+								else
+									if(emp.getDni().length()>8)
+										error="El Dni solo puede tener 8 digitos";
+									else
+										if(emp.getPhone().isEmpty())
+											error="El Campo Teléfono es requerido";
+										else
+											if(emp.getPhone().length()<7)
+												error="El teléfono puede tener como mínimo 7 digitos";
+											else 
+												if(!isNumeric(emp.getPhone().substring(0, 5)) | !isNumeric(emp.getPhone().substring(5)))
+													error="El campo Teléfono solo debe contener números";
+												else
+													if(emp.getPhone().length()>9)
+														error="El teléfono puede tener como máximo 9 caracteres";
+													else
+														if(emp.getAddress().equals(""))
+															error="El campo Dirección es requerido";
+														else
+															if(emp.getSalary()==0)
+																error="El campo Salario es requerido";
+															else {
+																employeeService.addEmployee(emp);
+																success="Empleado insertado correctamente";
+															}
+											
+													
+			}
+			
+			
 		} catch (Exception e) {
-			response.setError("ERROR en la Inserción  detalle: " + e.getMessage());
+			error=e.getMessage();
+			if(error.contains("DNI"))
+				error="El DNI ingresado ya existe para otro Empleado";
+			else if(error.contains("Phone"))
+				error="El Teléfono ingresado ya existe para otro empleado";
 		}
-
-//		HttpHeaders headers= new HttpHeaders();
+		response.setSuccess(success);
+		response.setError(error);
+		System.out.println(success);
+		System.out.println(error);
 
 		return new ResponseEntity<Response>(response, HttpStatus.CREATED);
 	}
@@ -68,14 +121,62 @@ public class EmployeeController {
 	@RequestMapping(value = "/EmployeeUpdate/{id}", method = RequestMethod.PUT, headers = "Accept=application/json")
 	public ResponseEntity<Response> update(@PathVariable("id") int id, @RequestBody Employee emp) {
 		Response response = new Response();
+		String success="",error="";
 		try {
 			emp.setEmployeeId(id);
-			employeeService.updateEmployee(id, emp);
-			response.setSuccess("El empleado <strong>"+emp.getFirstName()+" "+emp.getMiddleName()+"</strong> fue actualizado correctamente");
+			if(emp.getFirstName().equals("")) {
+				error="El campo Nombre es requerido";
+			}else {
+				if(emp.getMiddleName().equals(""))
+					error="El campo Ape.Paterno es requerido";
+				else
+					if(emp.getLastName().equals(""))
+						error="El campo Ape. Materno es requerido";
+					else
+						if(emp.getHireDate()==null)
+							error="La fecha de Ingreso es requerido";
+						else
+							if(emp.getDni().equals(""))
+								error="El campo Dni es requerido";
+							else
+								if(!isNumeric(emp.getDni()))
+									error="El campo dni solo debe contener Números";
+								else
+									if(emp.getDni().length()>8)
+										error="El Dni solo puede tener 8 digitos";
+									else
+										if(emp.getPhone().isEmpty())
+											error="El Campo Teléfono es requerido";
+										else
+											if(emp.getPhone().length()>7)
+												error="El teléfono puede tener como mínimo 7 digitos";
+											else 
+												if(!isNumeric(emp.getPhone().substring(0, 5)) | !isNumeric(emp.getPhone().substring(5)))
+													error="El campo Teléfono solo debe contener números";
+												else
+													if(emp.getPhone().length()>9)
+														error="El teléfono puede tener como máximo 9 caracteres";
+													else
+														if(emp.getAddress().equals(""))
+															error="El campo Dirección es requerido";
+														else
+															if(emp.getSalary()==0)
+																error="El campo Salario es requerido";															
+															else {
+																employeeService.updateEmployee(id, emp);
+																success="El empleado <strong>"+emp.getFirstName()+" "+emp.getMiddleName()+"</strong> fue actualizado correctamente";
+															}
+													
+			}
 		} catch (Exception e) {
-			response.setError("No se pudo actualizar los datos del empleado,  detalle: "+e.getMessage());
+			error=e.getMessage();
+			if(error.contains("DNI"))
+				error="El DNI ingresado ya existe para otro Empleado";
+			else if(error.contains("Phone"))
+				error="El Teléfono ingresado ya existe para otro empleado";			
 		}
-
+		response.setSuccess(success);
+		response.setError(error);
 		return new ResponseEntity<Response>(response, HttpStatus.OK);
 	}
 
@@ -91,7 +192,18 @@ public class EmployeeController {
 			response.setError("No se pudo eliminar al empleado, detalle: "+e.getMessage());
 		}		
 
-		return new ResponseEntity<Response>(response, HttpStatus.NO_CONTENT);
+		return new ResponseEntity<Response>(response, HttpStatus.OK);
+	}
+	
+	private Boolean isNumeric(String cadena) {
+		Boolean result;
+		try {
+			Integer.parseInt(cadena);
+			result=true;
+		} catch (NumberFormatException e) {
+			result=false;
+		}
+		return result;
 	}
 
 }
