@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Supplier")
 
@@ -33,7 +35,8 @@ public class Supplier implements Serializable {
 
 	@Column(name = "Phone")
 	private String phone;
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "SupplierProduct")
 	private List<Product> listProduct;
 
