@@ -63,9 +63,9 @@ public class SupplierController {
 					error = "El campo Teléfono es requerido.";
 				else if (supplier.getPhone().length() < 7)
 					error = "El campo Teléfono puede tener como mínimo 7 digitos.";
-				else if (!isNumeric(supplier.getPhone().substring(0, 5)) | !isNumeric(supplier.getPhone().substring(5)))
-					error = "El campo Teléfono solo debe contener números.";
-				else if (supplier.getPhone().length() > 9)
+//				else if (!isNumeric(supplier.getPhone().substring(0, 5)) | !isNumeric(supplier.getPhone().substring(5)))
+//					error = "El campo Teléfono solo debe contener números.";
+				else if (supplier.getPhone().length() >= 9)
 					error = "El campo Teléfono puede tener como máximo 9 caracteres.";
 				else {
 					supplierService.addSupplier(supplier);
@@ -110,9 +110,9 @@ public class SupplierController {
 					error = "El campo Teléfono es requerido.";
 				else if (supplier.getPhone().length() < 7)
 					error = "El campo Teléfono puede tener como mínimo 7 digitos.";
-				else if (!isNumeric(supplier.getPhone().substring(0, 5)) | !isNumeric(supplier.getPhone().substring(5)))
-					error = "El campo Teléfono solo debe contener números.";
-				else if (supplier.getPhone().length() > 9)
+//				else if (!isNumeric(supplier.getPhone().substring(0, 5)) | !isNumeric(supplier.getPhone().substring(5)))
+//					error = "El campo Teléfono solo debe contener números.";
+				else if (supplier.getPhone().length() >= 9)
 					error = "El campo Teléfono puede tener como máximo 9 caracteres.";
 				else {
 					supplierService.updateSupplier(id, supplier);
