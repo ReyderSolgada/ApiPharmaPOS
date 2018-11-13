@@ -69,11 +69,11 @@ public class EmployeeController {
 							if(emp.getDni().equals(""))
 								error="El campo Dni es requerido";
 							else
-								if(!isNumeric(emp.getDni()))
-									error="El campo dni solo debe contener Números";
+								if(emp.getDni().length()!=8)
+									error="El Dni debe tener 8 digitos";
 								else
-									if(emp.getDni().length()>8)
-										error="El Dni solo puede tener 8 digitos";
+									if(!isNumeric(emp.getDni()))										
+										error="El campo dni solo debe contener Números";
 									else
 										if(emp.getPhone().isEmpty())
 											error="El Campo Teléfono es requerido";
@@ -139,23 +139,23 @@ public class EmployeeController {
 							if(emp.getDni().equals(""))
 								error="El campo Dni es requerido";
 							else
-								if(!isNumeric(emp.getDni()))
-									error="El campo dni solo debe contener Números";
+								if(emp.getDni().length()!=8)
+									error="El Dni debe tener 8 digitos";
 								else
-									if(emp.getDni().length()>8)
-										error="El Dni solo puede tener 8 digitos";
+									if(!isNumeric(emp.getDni()))										
+										error="El campo dni solo debe contener Números";
 									else
 										if(emp.getPhone().isEmpty())
 											error="El Campo Teléfono es requerido";
 										else
-											if(emp.getPhone().length()>7)
+											if(emp.getPhone().length()<7)
 												error="El teléfono puede tener como mínimo 7 digitos";
 											else 
 												if(!isNumeric(emp.getPhone().substring(0, 5)) | !isNumeric(emp.getPhone().substring(5)))
 													error="El campo Teléfono solo debe contener números";
 												else
 													if(emp.getPhone().length()>9)
-														error="El teléfono puede tener como máximo 9 caracteres";
+														error="El teléfono puede tener como máximo 9 digitos";
 													else
 														if(emp.getAddress().equals(""))
 															error="El campo Dirección es requerido";
@@ -177,6 +177,7 @@ public class EmployeeController {
 		}
 		response.setSuccess(success);
 		response.setError(error);
+		System.out.println("Teléfono "+emp.getPhone());
 		return new ResponseEntity<Response>(response, HttpStatus.OK);
 	}
 
