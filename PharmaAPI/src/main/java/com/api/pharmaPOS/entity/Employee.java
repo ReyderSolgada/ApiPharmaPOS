@@ -51,9 +51,15 @@ public class Employee implements Serializable {
 
 	@Column(name = "Phone")
 	private String phone;
+	
+	@Column(name="Email")
+	private String email;
 
 	@Column(name = "Address")
 	private String address;
+	
+	@Column(name="State")
+	private boolean state;
 
 	@JsonIgnore
 	@ManyToOne
@@ -108,8 +114,16 @@ public class Employee implements Serializable {
 		return phone;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
 	public String getAddress() {
 		return address;
+	}
+
+	public boolean isState() {
+		return state;
 	}
 
 	public District getDistrictEmployee() {
@@ -164,8 +178,16 @@ public class Employee implements Serializable {
 		this.phone = phone;
 	}
 
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public void setState(boolean state) {
+		this.state = state;
 	}
 
 	public void setDistrictEmployee(District districtEmployee) {

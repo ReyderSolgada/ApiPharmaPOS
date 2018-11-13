@@ -24,11 +24,11 @@ public class User implements Serializable {
 	@Column(name = "UserId")
 	private int userId;
 
+	@Column(name = "UserName")
+	private String UserName;
+	
 	@Column(name = "State")
 	private boolean State;
-
-	@Column(name = "Email")
-	private String email;
 
 	@Column(name = "Password")
 	private String password;
@@ -46,8 +46,8 @@ public class User implements Serializable {
 		return State;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUserName() {
+		return UserName;
 	}
 
 	public String getPassword() {
@@ -66,8 +66,8 @@ public class User implements Serializable {
 		State = state;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUserName(String userName) {
+		UserName = userName;
 	}
 
 	public void setPassword(String password) {
@@ -77,6 +77,5 @@ public class User implements Serializable {
 	public void setEmployeeUser(Employee employeeUser) {
 		EmployeeUser = employeeUser;
 	}
-	
 
 }
