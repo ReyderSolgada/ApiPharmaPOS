@@ -1,17 +1,23 @@
 package com.api.pharmaPOS.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.api.pharmaPOS.entity.Category;
 import com.api.pharmaPOS.entity.Laboratory;
 import com.api.pharmaPOS.service.LaboratoryService;
 
 @RestController
+@RequestMapping("/api")
 
 public class LaboratoryController {
 
@@ -22,9 +28,12 @@ public class LaboratoryController {
 
 	// Method to get all laboratories
 
-	@RequestMapping("/laboratories")
-	public List<Laboratory> getAllLaboratories() {
-		return laboratoryService.getAllLaboratories();
+	@RequestMapping(value="/laboratories",method=RequestMethod.GET,headers="Accept=application/json")
+	public ResponseEntity<List<Laboratory>> getAllLaboratories(){
+		List<Laboratory> lista=new ArrayList<Laboratory>();
+		lista= laboratoryService.getAllLaboratories();
+
+		return  new ResponseEntity<List<Laboratory>>(lista,HttpStatus.OK);
 	}
 
 	// Method to get laboratory by id

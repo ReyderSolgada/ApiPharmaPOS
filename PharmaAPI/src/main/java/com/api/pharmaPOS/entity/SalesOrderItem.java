@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "SalesOrderItem")
 
@@ -24,10 +26,12 @@ public class SalesOrderItem implements Serializable {
 	@Column(name = "UnitPrice")
 	private double unitPrice;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "SalesOrderItemId", referencedColumnName = "SalesOrderId", insertable = false, updatable = false)
 	private SalesOrder SalesOrderSalesOrderItem;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "ProductId", referencedColumnName = "ProductId", insertable = false, updatable = false)
 	private Product ProductSalesOrderItem;

@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Customer")
 
@@ -48,6 +50,7 @@ public class Customer implements Serializable {
 	@Column(name = "Address")
 	private String address;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "DistrictId")
 	private District DistrictCustomer;
@@ -59,6 +62,7 @@ public class Customer implements Serializable {
 	@Column(name = "Type")
 	private String type;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "CustomerSalesOrder")
 	private List<SalesOrder> listSalesOrder;
 

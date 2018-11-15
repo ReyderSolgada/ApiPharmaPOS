@@ -1,18 +1,23 @@
 package com.api.pharmaPOS.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.api.pharmaPOS.entity.District;
 import com.api.pharmaPOS.entity.Supplier;
 import com.api.pharmaPOS.service.SupplierService;
 
 @RestController
-
+@RequestMapping("/api")
 public class SupplierController {
 
 	// Dependency injection
@@ -22,9 +27,12 @@ public class SupplierController {
 
 	// Method to get all suppliers
 
-	@RequestMapping("/suppliers")
-	public List<Supplier> getAllSuppliers() {
-		return supplierService.getAllSuppliers();
+	@RequestMapping(value="/suppliers",method=RequestMethod.GET,headers="Accept=application/json")
+	public ResponseEntity<List<Supplier>> getAllSuppliers(){
+		List<Supplier> lista=new ArrayList<Supplier>();
+		lista= supplierService.getAllSuppliers();
+
+		return  new ResponseEntity<List<Supplier>>(lista,HttpStatus.OK);
 	}
 
 	// Method to get suppliers by id
