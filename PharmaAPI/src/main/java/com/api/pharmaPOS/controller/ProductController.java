@@ -21,7 +21,7 @@ import com.api.pharmaPOS.util.Response;
 @RestController
 @RequestMapping("/api")
 public class ProductController {
-
+ 
 	@Autowired
 	private ProductService productService;
 
