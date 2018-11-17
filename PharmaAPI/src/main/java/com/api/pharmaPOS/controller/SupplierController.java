@@ -11,13 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.api.pharmaPOS.entity.District;
 import com.api.pharmaPOS.entity.Supplier;
 import com.api.pharmaPOS.service.SupplierService;
 
 @RestController
 @RequestMapping("/api")
+
 public class SupplierController {
 
 	// Dependency injection
