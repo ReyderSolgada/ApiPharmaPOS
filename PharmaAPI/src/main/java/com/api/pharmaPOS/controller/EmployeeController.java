@@ -189,4 +189,12 @@ public class EmployeeController {
 		return new ResponseEntity<Optional<Employee>>(user, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/EmployeeSearch/{name}", method = RequestMethod.GET, headers = "Accept=application/json")
+	public ResponseEntity<List<Employee>> getEmployeeByFirstName(@PathVariable("name") String name) {
+		List<Employee> lista = new ArrayList<Employee>();
+		lista = employeeService.getEmployeeByFirstName(name);
+		System.out.println(name);
+		return new ResponseEntity<List<Employee>>(lista, HttpStatus.OK);
+	}
+
 }

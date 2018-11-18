@@ -129,5 +129,13 @@ public class ProductController {
 
 			return new ResponseEntity<Response>(response, HttpStatus.OK);
 		}
+		
+		@RequestMapping(value = "/ProductSearch/{name}", method = RequestMethod.GET, headers = "Accept=application/json")
+		public ResponseEntity<List<Product>> getProductByDescription(@PathVariable("name") String name) {
+			List<Product> lista = new ArrayList<Product>();
+			lista = productService.getProductByDescription(name);
+
+			return new ResponseEntity<List<Product>>(lista, HttpStatus.OK);
+		}
 
 }

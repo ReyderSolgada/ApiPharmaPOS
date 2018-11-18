@@ -28,6 +28,12 @@ public class EmployeeService {
 		return employees;
 	}
 
+	public List<Employee> getEmployeeByFirstName(String name) {
+		List<Employee> employees = new ArrayList<>();
+		employeeRepository.getEmployeeByFirstName(name).forEach(employees::add);
+		return employees;
+	}
+
 	// Method to add a new employee
 
 	public void addEmployee(Employee employee) {

@@ -27,6 +27,11 @@ public class ProductService {
 		productRepository.findAll().forEach(products::add);
 		return products;
 	}
+	public List<Product> getProductByDescription(String name){
+		List<Product> products = new ArrayList<>();
+		productRepository.getProductByDescription(name).forEach(products::add);
+		return products;
+	}
 
 	// Method to add a new product
 
