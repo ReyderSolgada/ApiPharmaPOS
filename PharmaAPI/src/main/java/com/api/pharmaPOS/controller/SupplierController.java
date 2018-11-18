@@ -97,7 +97,7 @@ public class SupplierController {
 
 	@CrossOrigin(origins = "http://localhost:8080")
 	@PutMapping(value = "/SupplierUpdate/{id}")
-	public ResponseEntity<Response> updateSupplier(@PathVariable("id") int id, @RequestBody Supplier supplier) {
+	public ResponseEntity<Response> updateSupplier(@PathVariable("id") Long id, @RequestBody Supplier supplier) {
 		Response response = new Response();
 		String success = "", error = "";
 		try {

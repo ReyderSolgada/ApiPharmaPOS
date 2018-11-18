@@ -42,7 +42,7 @@ public class SupplierService {
 
 	// Method to update a supplier
 
-	public void updateSupplier(int id, Supplier supplier) {
+	public void updateSupplier(Long id, Supplier supplier) {
 		supplierRepository.save(supplier);
 	}
 

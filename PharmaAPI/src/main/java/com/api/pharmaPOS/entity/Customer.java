@@ -26,8 +26,8 @@ public class Customer implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ClientId")
-	private int clientId;
+	@Column(name = "CustomerId")
+	private int CustomerId;
 
 	@Column(name = "FirstName")
 	private String firstName;
@@ -66,12 +66,12 @@ public class Customer implements Serializable {
 	@OneToMany(mappedBy = "CustomerSalesOrder")
 	private List<SalesOrder> listSalesOrder;
 
-	public int getClientId() {
-		return clientId;
+	public int getCustomerId() {
+		return CustomerId;
 	}
 
-	public void setClientId(int clientId) {
-		this.clientId = clientId;
+	public void setCustomerId(int customerId) {
+		CustomerId = customerId;
 	}
 
 	public String getFirstName() {
