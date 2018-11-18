@@ -27,7 +27,7 @@ public class Customer implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "CustomerId")
-	private int CustomerId;
+	private Long CustomerId;
 
 	@Column(name = "FirstName")
 	private String firstName;
@@ -66,11 +66,11 @@ public class Customer implements Serializable {
 	@OneToMany(mappedBy = "CustomerSalesOrder")
 	private List<SalesOrder> listSalesOrder;
 
-	public int getCustomerId() {
+	public Long getCustomerId() {
 		return CustomerId;
 	}
 
-	public void setCustomerId(int customerId) {
+	public void setCustomerId(Long customerId) {
 		CustomerId = customerId;
 	}
 

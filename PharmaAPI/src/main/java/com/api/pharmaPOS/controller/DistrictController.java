@@ -16,6 +16,7 @@ import com.api.pharmaPOS.service.DistrictService;
 
 @RestController
 @RequestMapping("/api")
+
 public class DistrictController {
 
 	// Dependency injection
