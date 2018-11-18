@@ -36,19 +36,19 @@ public class CustomerService {
 
 	// Method to find a customer by id
 
-	public Optional<Customer> getCustomer(Long id) {
+	public Optional<Customer> getCustomer(int id) {
 		return customerRepository.findById(id);
 	}
 
 	// Method to update a customer
 
-	public void updateCustomer(Long id, Customer customer) {
+	public void updateCustomer(int id, Customer customer) {
 		customerRepository.save(customer);
 	}
 
 	// Method to delete a customer
 
-	public void deleteCustomer(Long id) {
+	public void deleteCustomer(int id) {
 		customerRepository.deleteById(id);
 	}
 
